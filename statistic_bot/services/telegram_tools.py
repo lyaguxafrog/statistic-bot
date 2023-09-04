@@ -29,7 +29,7 @@ def generate_session(length: int) -> str:
         logs_gen(logs_type='CRITICAL',
                   logs_message=f'Неверно указана длинна строки: {error}')
 
-def telegram_auth(login: None) -> None:
+async def telegram_auth() -> None:
     """ Логин в телеграм по API """
 
     logs_gen(logs_type='INFO',
@@ -43,7 +43,7 @@ def telegram_auth(login: None) -> None:
         session = generate_session(8)
 
         logs_gen(logs_type='INFO', logs_message=f'''
-                API ID: {api_id}\n
+                API ID: {api_id}
                 API_HASH: {api_hash}
                 PHONE = {phone_number}
                 SESSION = {session}''')
@@ -51,11 +51,21 @@ def telegram_auth(login: None) -> None:
         client = TelegramClient(session=session, api_id=api_id, 
                                 api_hash=api_hash, )
         
-        try:
-            client.connect()
-        except OSError as error:
-            logs_gen(logs_type='CRITICAL', 
-            logs_message=f'Не удалось подключиться к телеграмму: {error}')
+        return client
+
     except:
         logs_gen(logs_type='CRITICAL',
                   logs_message='Не удалось подключится, проверьте .env')
+        
+# TODO: Завтра, доделать
+# async def get_messages(url: str):
+#     """
+#     Получение данных о сообщениях в канале
+
+#     :params url: ссылка на телеграм канал
+#     """ 
+
+#     offset_message = 0
+#     limited_message = 9999999
+
+#     all_message = []
