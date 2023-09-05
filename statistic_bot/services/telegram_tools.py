@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 # /statistic_bot/services/telegram_tools.py
 
-import requests as rq
-import telethon
 from telethon import TelegramClient
 
 import random
 import string
 import os 
 from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
-
 from logs import logs_gen
+
+load_dotenv(find_dotenv())
 
 def generate_session(length: int) -> str:
     """  
@@ -57,15 +55,3 @@ async def telegram_auth() -> None:
         logs_gen(logs_type='CRITICAL',
                   logs_message='Не удалось подключится, проверьте .env')
         
-# TODO: Завтра, доделать
-# async def get_messages(url: str):
-#     """
-#     Получение данных о сообщениях в канале
-
-#     :params url: ссылка на телеграм канал
-#     """ 
-
-#     offset_message = 0
-#     limited_message = 9999999
-
-#     all_message = []

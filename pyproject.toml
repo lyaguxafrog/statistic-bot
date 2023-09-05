@@ -6,7 +6,7 @@ authors = ["Adrian Makridenko <maccree.a@yandex.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 lxml = "^4.9.3"
 requests = "^2.31.0"
 telethon = "^1.29.3"
