@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# /statisic_bot/services/logs.py
+# /app/services/logs.py
 
 import logging
 
 import datetime
 
 now = str(datetime.datetime.now())
-logging.basicConfig(level=logging.INFO, filename=f"{now}_log.log",filemode="w",
+logging.basicConfig(level=logging.INFO, filename=f"{now}.log",filemode="w",
                      format="%(asctime)s %(levelname)s %(message)s")
 
 def logs_gen(logs_type: str, logs_message: str) -> None:
@@ -23,7 +23,7 @@ def logs_gen(logs_type: str, logs_message: str) -> None:
     if logs_type == 'INFO':
         logging.info(msg=logs_message)
     elif logs_type == 'WARNING':
-        logging.ingo(msg=logs_message)
+        logging.warning(msg=logs_message)
     elif logs_type == 'ERROR':
         logging.error(msg=logs_message)
     elif logs_type == 'CRITICAL':
