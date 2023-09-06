@@ -51,5 +51,4 @@ def reset() -> None:
     except KeyboardInterrupt:
         logs_gen(logs_type='INFO', logs_message='Остановка сбора данных пользователем...')
 
-if __name__ == "__main__":
-    reset()  # Запуск начальной функции reset()
+

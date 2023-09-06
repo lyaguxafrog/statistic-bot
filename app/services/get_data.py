@@ -13,6 +13,8 @@ from app.services.logs import logs_gen
 
 load_dotenv(find_dotenv())
 
+text = None
+
 async def get_channel_id(client, link) -> int:
     """
     Функция получения ID канала
@@ -25,6 +27,12 @@ async def get_channel_id(client, link) -> int:
     entity = await client.get_entity(link)
     if entity:
         return entity.id
+
+def clearify_text(msg):
+    text = msg.message
+    text_splitted = text.split()
+    text_listed = [word for word in text_splitted if word != ' ']
+    return " ".join(text_listed)  # Возвращаем текст как строку
 
 def find_last_parsed_date(path):
     paths = glob(f"data/{path}/*/*meta.txt", recursive=True)
@@ -47,11 +55,11 @@ def mysql_tool() -> sql.Connection:
     """
     try:
         connection = sql.connect(
-            host="158.160.37.87",
+            host=os.getenv("MYSQL_HOST"),
             port=3306,
-            user="epec_remote",
-            password="gWGi1pJXn2KaJpts!",
-            database="test_db",
+            user=os.getenv("MYSQL_USER"),
+            password=os.getenv("MYSQL_PASSWORD"),
+            database=os.getenv("MYSQL_DB"),
             cursorclass=sql.cursors.DictCursor
         )
         logs_gen(logs_type='INFO',
@@ -94,8 +102,8 @@ def get_message_content(client, msg, channel_name, directory_name):
     """
     message_id = str(msg.id)
     message_date = str(msg.date)
-    message_text = str(msg.text)
     message_views = str(msg.views)
+    message_text = ""  # Инициализируйте message_text пустой строкой
 
     file = open(f"data/{channel_name}/{directory_name}/{directory_name}_meta.txt", 'a+')
     file.write(message_id)
@@ -103,9 +111,9 @@ def get_message_content(client, msg, channel_name, directory_name):
     file.close()
 
     if msg.text:
-        text = message_text
+        message_text = clearify_text(msg)  # Присваиваем значение, если msg.text не равен None
         file = open(f"data/{channel_name}/{directory_name}/{directory_name}.txt", "w")
-        file.write(text)
+        file.write(message_text)
         file.close()
 
     if msg.media:
@@ -132,6 +140,7 @@ INSERT INTO `stats` (post_id, stat, timestamp, message_text) VALUES ('{message_i
         logs_gen(logs_type='CRITICAL', 
                   logs_message=f'Критическая ошибка: {err}')
         connection.rollback()
+
 
 async def parse(client, url):
     err = []
