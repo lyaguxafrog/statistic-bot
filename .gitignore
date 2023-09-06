@@ -1,0 +1,14 @@
+.venv/
+*.lock
+.env
+vscode/
+__pycache__/
+*_test.py
+*.log
+*.session
+*.session*
+*.json
+
+nw/
+
+data/
