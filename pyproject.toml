@@ -1,12 +1,23 @@
 [tool.poetry]
 name = "statistic-bot"
-version = "0.1.0"
+version = "0.0.1"
 description = ""
-authors = ["adrian <maccree.a@yandex.ru>"]
+authors = ["Adrian Makridenko <maccree.a@yandex.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+lxml = "^4.9.3"
+requests = "^2.31.0"
+telethon = "^1.29.3"
+python-dotenv = "^1.0.0"
+selenium = "^4.12.0"
+undetected-chromedriver = "^3.5.3"
+undetected-chromedriver2 = "^3.5.1"
+python-dateutil = "^2.8.2"
+mysql-connector-python = "^8.1.0"
+pymysql = "^1.1.0"
+cryptography = "^41.0.3"
 
 
 [build-system]
