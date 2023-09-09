@@ -14,6 +14,7 @@ async def print_message():
     print("MESSAGE:", end="\n-------\n")
     print(message.text)
     print(message.id)
+    print(message.views)
 
 with client:
     client.loop.run_until_complete(print_message())

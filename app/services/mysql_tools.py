@@ -73,7 +73,7 @@ def save_data_to_mysql(connection: sql.Connection,
 
     table = os.getenv("TABLE_SAVE")
     query = f'''
-    INSERT INTO {table} (post_id, stat, timestamp, message_text) VALUES ({post_id}, {views}, {timestamp}, {text})'''
+    INSERT INTO {table} (post_id, stat, timestamp, message_text) VALUES ('{post_id}', '{views}', '{timestamp}', '{text}')'''
 
     try:
         with connection.cursor() as cursor:
