@@ -23,9 +23,7 @@ time = float(os.getenv("TIME"))
 
 async def pars() -> None:
     global flag
-    print("Нажмите Ctrl+C для остановки.")
     logs_gen(logs_type='INFO', logs_message='Start...')
-    threading.Timer(time, pars).start()
 
     try:
 

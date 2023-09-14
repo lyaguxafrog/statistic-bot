@@ -36,6 +36,7 @@ async def telegram_get_messages(client, channel_name: str, post_id: str):
     :returns: ID поста, просмотры, время, текст
     """
 
+
     message = await client.get_messages(channel_name, ids=post_id)
 
     message_id = message.id
