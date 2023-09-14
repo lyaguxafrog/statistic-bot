@@ -18,12 +18,14 @@ api_id = os.getenv("API_ID")
 api_hash = os.getenv("API_HASH")
 session = os.getenv("TELEGRAM_SESSION")
 flag = True
+time = float(os.getenv("TIME"))
+
 
 async def pars() -> None:
     global flag
     print("Нажмите Ctrl+C для остановки.")
     logs_gen(logs_type='INFO', logs_message='Start...')
-    threading.Timer(3600.0, pars).start()
+    threading.Timer(time, pars).start()
 
     try:
 
