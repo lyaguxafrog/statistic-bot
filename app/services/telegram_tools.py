@@ -11,6 +11,19 @@ from app.services.logs import logs_gen
 from app.services.mysql_tools import *
 
 
+def clear_text(message):
+    """
+    Функция очистки сообщения
+
+    :params message: сообщение
+
+    :returns: Очищенное сообщение
+    """
+    text = message
+    text_splitted = text.split()
+    text_listed = [word for word in text_splitted if word != ' ']
+    return " ".join(text_listed)
+
 
 async def telegram_get_messages(client, channel_name: str, post_id: str):
     """
@@ -23,12 +36,13 @@ async def telegram_get_messages(client, channel_name: str, post_id: str):
     :returns: ID поста, просмотры, время, текст
     """
 
+
     message = await client.get_messages(channel_name, ids=post_id)
 
     message_id = message.id
     message_views = message.views
     message_date = message.date
-    message_text = str(message.text)
+    message_text = clear_text(str(message.text))
 
     logs_gen(logs_type='INFO', logs_message=f'''Получены данные\n
                                                 {message_id}
